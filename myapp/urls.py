@@ -34,7 +34,7 @@ urlpatterns = [
     #------------------------------------Like---------------------------------------------------------
     
     path('like/',views.like,name='like'),
-    path('unlike/',views.unlike,name='unlike'),
+    # path('unlike/',views.unlike,name='unlike'),
     
     #-------------------------------------request--------------------------------------------------
     

@@ -237,23 +237,23 @@ def like(request):
       
 
 
-@login_required(login_url='/')
-def unlike(request): 
-    user=request.user
-    if request.method == "POST":
-        id=request.POST.get('id')
-        val=request.POST.get('str')
-        post=Post.objects.get(id=id)
-        if val == 'Like':
-            post.likes.add(user)
-            post.save()
-            a=post.total_likes
-            return JsonResponse({'status':200,'likes':a})
-        else:
-            post.likes.remove(user)
-            post.save()
-            a=post.total_likes
-            return JsonResponse({'status':200,'likes':a})
+# @login_required(login_url='/')
+# def unlike(request): 
+#     user=request.user
+#     if request.method == "POST":
+#         id=request.POST.get('id')
+#         val=request.POST.get('str')
+#         post=Post.objects.get(id=id)
+#         if val == 'Like':
+#             post.likes.add(user)
+#             post.save()
+#             a=post.total_likes
+#             return JsonResponse({'status':200,'likes':a})
+#         else:
+#             post.likes.remove(user)
+#             post.save()
+#             a=post.total_likes
+#             return JsonResponse({'status':200,'likes':a})
 #-----------------------------------------friend-request---------------------------------------
 @login_required(login_url='/')
 def sent_request(request,pk):
