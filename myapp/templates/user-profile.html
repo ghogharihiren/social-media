@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My-profile</title>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+    body{
+        background: #eaeaea;
+        margin-top:20px;
+    }
+    .profile-info-list {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    .friend-list,
+    .img-grid-list {
+        margin: -1px;
+        list-style-type: none;
+    }
+    .profile-info-list > li.title {
+        font-size: 0.625rem;
+        font-weight: 700;
+        color: #8a8a8f;
+        padding: 0 0 0.3125rem;
+    }
+    .profile-info-list > li + li.title {
+        padding-top: 1.5625rem;
+    }
+    .profile-info-list > li {
+        padding: 0.625rem 0;
+    }
+    .profile-info-list > li .field {
+        font-weight: 700;
+    }
+    .profile-info-list > li .value {
+        color: #666;
+    }
+    .profile-info-list > li.img-list a {
+        display: inline-block;
+    }
+    .profile-info-list > li.img-list a img {
+        max-width: 2.25rem;
+        -webkit-border-radius: 2.5rem;
+        -moz-border-radius: 2.5rem;
+        border-radius: 2.5rem;
+    }
+    .coming-soon-cover img,
+    .email-detail-attachment .email-attachment .document-file img,
+    .email-sender-img img,
+    .friend-list .friend-img img,
+    .profile-header-img img {
+        max-width: 100%;
+    }
+    .table.table-profile th {
+        border: none;
+        color: #000;
+        padding-bottom: 0.3125rem;
+        padding-top: 0;
+    }
+    .table.table-profile td {
+        border-color: #c8c7cc;
+    }
+    .table.table-profile tbody + thead > tr > th {
+        padding-top: 1.5625rem;
+    }
+    .table.table-profile .field {
+        color: #666;
+        font-weight: 600;
+        width: 25%;
+        text-align: right;
+    }
+    .table.table-profile .value {
+        font-weight: 500;
+    }
+    .profile-header {
+        position: relative;
+        overflow: hidden;
+    }
+    .profile-header .profile-header-cover {
+        background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
+        background-size: 100% auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+    .profile-header .profile-header-cover:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0.85) 100%);
+    }
+    .profile-header .profile-header-content,
+    .profile-header .profile-header-tab,
+    .profile-header-img,
+    body .fc-icon {
+        position: relative;
+    }
+    .profile-header .profile-header-tab {
+        background: #fff;
+        list-style-type: none;
+        margin: -1.25rem 0 0;
+        padding: 0 0 0 8.75rem;
+        border-bottom: 1px solid #c8c7cc;
+        white-space: nowrap;
+    }
+    .profile-header .profile-header-tab > li {
+        display: inline-block;
+        margin: 0;
+    }
+    .profile-header .profile-header-tab > li > a {
+        display: block;
+        color: #000;
+        line-height: 1.25rem;
+        padding: 0.625rem 1.25rem;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.75rem;
+        border: none;
+    }
+    .profile-header .profile-header-tab > li.active > a,
+    .profile-header .profile-header-tab > li > a.active {
+        color: #007aff;
+    }
+    .profile-header .profile-header-content:after,
+    .profile-header .profile-header-content:before {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .profile-header .profile-header-content {
+        color: #fff;
+        padding: 1.25rem;
+    }
+    body .fc th a,
+    body .fc-ltr .fc-basic-view .fc-day-top .fc-day-number,
+    body .fc-widget-header a {
+        color: #000;
+    }
+    .profile-header-img {
+        float: left;
+        width: 7.5rem;
+        height: 7.5rem;
+        overflow: hidden;
+        z-index: 10;
+        margin: 0 1.25rem -1.25rem 0;
+        padding: 0.1875rem;
+        -webkit-border-radius: 0.25rem;
+        -moz-border-radius: 0.25rem;
+        border-radius: 0.25rem;
+        background: #fff;
+    }
+    .profile-header-info h4 {
+        font-weight: 500;
+        margin-bottom: 0.3125rem;
+    }
+    .profile-container {
+        padding: 1.5625rem;
+    }
+    @media (max-width: 967px) {
+        .profile-header-img {
+            width: 5.625rem;
+            height: 5.625rem;
+            margin: 0;
+        }
+        .profile-header-info {
+            margin-left: 6.5625rem;
+            padding-bottom: 0.9375rem;
+        }
+        .profile-header .profile-header-tab {
+            padding-left: 0;
+        }
+    }
+    @media (max-width: 767px) {
+        .profile-header .profile-header-cover {
+            background-position: top;
+        }
+        .profile-header-img {
+            width: 3.75rem;
+            height: 3.75rem;
+            margin: 0;
+        }
+        .profile-header-info {
+            margin-left: 4.6875rem;
+            padding-bottom: 0.9375rem;
+        }
+        .profile-header-info h4 {
+            margin: 0 0 0.3125rem;
+        }
+        .profile-header .profile-header-tab {
+            white-space: nowrap;
+            overflow: scroll;
+            padding: 0;
+        }
+        .profile-container {
+            padding: 0.9375rem 0.9375rem 3.6875rem;
+        }
+        .friend-list > li {
+            float: none;
+            width: auto;
+        }
+    }
+    .profile-info-list {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    .friend-list,
+    .img-grid-list {
+        margin: -1px;
+        list-style-type: none;
+    }
+    .profile-info-list > li.title {
+        font-size: 0.625rem;
+        font-weight: 700;
+        color: #8a8a8f;
+        padding: 0 0 0.3125rem;
+    }
+    .profile-info-list > li + li.title {
+        padding-top: 1.5625rem;
+    }
+    .profile-info-list > li {
+        padding: 0.625rem 0;
+    }
+    .profile-info-list > li .field {
+        font-weight: 700;
+    }
+    .profile-info-list > li .value {
+        color: #666;
+    }
+    .profile-info-list > li.img-list a {
+        display: inline-block;
+    }
+    .profile-info-list > li.img-list a img {
+        max-width: 2.25rem;
+        -webkit-border-radius: 2.5rem;
+        -moz-border-radius: 2.5rem;
+        border-radius: 2.5rem;
+    }
+    .coming-soon-cover img,
+    .email-detail-attachment .email-attachment .document-file img,
+    .email-sender-img img,
+    .friend-list .friend-img img,
+    .profile-header-img img {
+        max-width: 100%;
+    }
+    .table.table-profile th {
+        border: none;
+        color: #000;
+        padding-bottom: 0.3125rem;
+        padding-top: 0;
+    }
+    .table.table-profile td {
+        border-color: #c8c7cc;
+    }
+    .table.table-profile tbody + thead > tr > th {
+        padding-top: 1.5625rem;
+    }
+    .table.table-profile .field {
+        color: #666;
+        font-weight: 600;
+        width: 25%;
+        text-align: right;
+    }
+    .table.table-profile .value {
+        font-weight: 500;
+    }
+    .row.row-space-2 {
+        margin: 0 -1px;
+    }
+    .m-b-2 {
+        margin-bottom: 2px!important;
+    }
+    .embed-responsive {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+    }
+    .row.row-space-2>[class*=col-] {
+        padding: 0 1px;
+    }
+
+</style>
+<div class="container">
+    <div id="content" class="content p-0">
+        <div class="profile-header">
+            <div class="profile-header-cover"></div>
+    
+            <div class="profile-header-content">
+                <div class="profile-header-img">
+                    <img src="{{user.profile_pic.url}}" alt="" />
+                </div>
+    
+                <div class="profile-header-info">
+                    <h4 class="m-t-sm">{{user.first_name}} {{user.last_name}}</h4>
+                    <h4></h4>
+                    
+                </div>
+            </div>
+    
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% if req %}
+                <li class="nav-item"><a href="" class="nav-link">Request Sent</a></li>
+                {% else %}
+                {% if request.user.id != user.id %}
+                {% if request.user not in user.friends.all %}
+				<a class="nav-link" href="{% url 'sent-request' user.id %}"><i class="fas fa-user fa-fw mr-2"></i>Sent Friend requset</a>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+
+            </ul>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="profile-container">
+            <div class="row row-space-20">
+                <div class="col-md-8">
+                    <div class="tab-content p-0">
+                        <div class="tab-pane active show" id="profile-videos">
+                            <div class="row row-space-2">
+                            {% for post in post %}
+                            
+                                <div class="col-sm-4">
+                                    <div class="embed-responsive embed-responsive-16by9 m-b-2">
+                                        <a href="{% url 'my-comment' post.id%}">
+                                            <img src="{{post.files.url}}" alt=""width="220" height="250">
+                                        </a>     
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4 hidden-xs hidden-sm">
+                    <ul class="profile-info-list">
+                        <li class="title">PERSONAL INFORMATION</li>
+                        <li>
+                            <div class="field">Username</div>
+                            <div class="value">{{user.username}}</div>
+                        </li>
+                        <li>
+                            <div class="field">Bio</div>
+                            <div class="value">{{user.bio}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

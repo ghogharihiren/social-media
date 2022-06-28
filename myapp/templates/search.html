@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+
+
+{% block content %}
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in user %}
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <img
+                src="{{user.profile_pic.url}}"
+                alt=""
+                style="width: 45px; height: 45px"
+                class="rounded-circle"
+                />
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{user.first_name}} {{user.last_name}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{user.username}}</p>
+        </td>
+       <td>
+        <a class="nav-link" href="{% url 'user-profile' user.id %}"><i class="fas fa-user fa-fw mr-2"></i>View-profile</a>
+     </td>    
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endblock %}

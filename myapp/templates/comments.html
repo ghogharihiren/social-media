@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Comment</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="{% static 'myapp/assets/css/theme-1.css' %}">
+
+</head> 
+
+<body>
+    
+    <header class="header text-center">	    
+	    <h1 class="blog-name pt-lg-4 mb-0"><a href="{% url 'user-profile' post.user.id %}">{{post.user.username}} Post</a></h1>
+        
+	    <nav class="navbar navbar-expand-lg navbar-dark" >
+           
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navigation" class="collapse navbar-collapse flex-column" >
+				<div class="profile-section pt-3 pt-lg-0">
+				    <img class="profile-image" src="{{post.files.url}}" alt=""  width="150" height="200">			
+					
+					<div class="bio mb-3">likes:{{post.total_likes}}<br></div>
+					
+			        <hr> 
+				</div><!--//profile-section-->
+				
+				<ul class="navbar-nav flex-column text-left">
+					<li class="nav-item active">
+					    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home fa-fw mr-2"></i>Home</a>
+					</li>
+					<li class="nav-item">
+					    <a class="nav-link" href="{% url 'user-profile' post.user.id %}"><i class="fas fa-user fa-fw mr-2"></i>Profile</a>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+    </header>
+    
+    <div class="main-wrapper">
+	    <h3>Total Comment: {{com1}}</h3>
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+		
+		
+	    <section class="blog-list px-3 py-5 p-md-5">
+			<form action="{% url 'comment' post.id %}" method="POST" class="cart-quantity">
+                {% csrf_token %}
+                <div class="quantity">
+                  <label>Add Comment</label>
+                  <div class="cart-plus-minus">
+                      <input class="form-control" name='comment'>
+                  </div>
+               </div> 
+                <div class="d-flex justify-content-between">
+                 <button type="submit" class="btn btn-sm btn-secondary mr-3">Submit</button>
+				</div>
+            </form>
+			
+		    <div class="container mt-3 w-100">
+                {% for com in com %}
+			    <div class="item mb-5 w-100">
+				    <div class="media">
+					    <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{com.user.profile_pic.url}}" alt="" width="70" height="70">
+					    <div class="media-body">
+						    <h3 class="title mb-1"><a href="{% url 'user-profile' com.user.id %}">{{com.user.username}}</a></h3>
+						    <div class="meta mb-1"><span class="date">Published {{com.post.date}}</span><span class="time">comment time: {{com.date}}</span></div>
+						    <div class="intro">{{com.comment}}</div>
+							{% if com.post.user == request.user %}
+						    <a class="more-link" href="{% url 'delete-comment' com.id%}">delete</a>
+							{% endif %}
+							{% if com.user == request.user %}
+							<a class="more-link" href="{% url 'delete-comment' com.id%}">delete</a>
+							{% endif %}
+					    </div><!--//media-body-->
+				    </div><!--//media-->
+			    </div><!--//item-->
+                
+                {% endfor %}
+                
+		    </div>
+           
+            
+	    </section>
+	    
+	   
+    
+    </div>
+    
+    <!-- Javascript -->          
+    <script src="{% static 'myapp/assets/plugins/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'myapp/assets/plugins/popper.min.js' %}"></script> 
+    <script src="{% static 'myapp/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script> 
+    
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="{% static 'myapp/assets/js/demo/style-switcher.js' %}"></script>     
+    
+
+</body>
+</html> 
+
