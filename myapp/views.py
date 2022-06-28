@@ -217,7 +217,7 @@ def delete_comment(request,pk):
 #         return redirect('all')
 
 @login_required(login_url='/')
-def like(request):
+def like_unlike(request):
     user=request.user
     if request.method == "POST":
         id=request.POST.get('id')

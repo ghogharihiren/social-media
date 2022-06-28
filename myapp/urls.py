@@ -33,7 +33,7 @@ urlpatterns = [
     
     #------------------------------------Like---------------------------------------------------------
     
-    path('like/',views.like,name='like'),
+    path('like-unlike/',views.like_unlike,name='like-unlike'),
     # path('unlike/',views.unlike,name='unlike'),
     
     #-------------------------------------request--------------------------------------------------

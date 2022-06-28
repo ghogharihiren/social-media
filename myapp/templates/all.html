@@ -31,7 +31,7 @@
                     <span id='post'>
                        
                         <div class="container" id="count-{{post.id}}"> {{post.total_likes}}</div>
-                            <form action="{% url 'like' %}" method="POST" >
+                            <form action="{% url 'like-unlike' %}" method="POST" >
                             {% csrf_token %}
                             <div class="d-flex justify-content-between">
                                 {% if request.user not in post.likes.all%}
