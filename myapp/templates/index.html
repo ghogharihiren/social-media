@@ -86,7 +86,7 @@
             console.log(id);
             $.ajax({
                 type:'POST',
-                url:'{% url "like" %}',
+                url:'{% url "like-unlike" %}',
                 data:mydata,
                 success:function(data){
                     console.log(data.likes)
@@ -115,7 +115,7 @@
             mydata={id:id,csrfmiddlewaretoken:csr,str:l};
             $.ajax({
                 type:'POST',
-                url:'{% url "like" %}',
+                url:'{% url "like-unlike" %}',
                 data:mydata,
                 success:function(data){
                     console.log(data.likes)
