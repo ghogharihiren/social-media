@@ -12,12 +12,17 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 
 
+def room(request, room_name):
+    return render(request, 'chat.html', {
+        'room_name': room_name
+    })
+
 # Create your views here.
-@login_required(login_url='/')
+# @login_required(login_url='/')
 def index(request):
    # req=Friendrequest.objects.filter(from_user=request.user)
     post=Post.objects.all()[::-1]
-    return render(request,'index.html',{'post':post})
+    return render(request,'index1.html',{'post':post})
     
 #-----------------------------register/login/logout/forgot-password--------------------------------------------------
   
